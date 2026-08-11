@@ -1,64 +1,37 @@
 # BUZZ!!
 
-弱小 youtuber 向けyoutubeコメントをdiscord経由で読み上げるアプリ
+Discord と YouTube Live のコメントを Google Cloud Text-to-Speech で読み上げます。Electron は使用せず、Node.js のローカル Web サーバーと既定ブラウザだけで動く軽量構成です。
 
-## アプリ起動
+## 起動
 
-`npx electron src`
+```bash
+npm install
+npm start
+```
 
-## DOSCORD こまんど　はう・とぅ・ゆーず
+`http://127.0.0.1:3210` をブラウザで開いてください。ポートは `PORT=3211 npm start` のように変更できます。
 
-### 接続
+Google Cloud で Cloud Text-to-Speech と Cloud Translation を有効にし、課金アカウントをリンクしたサービスアカウント JSON の絶対パスを画面へ入力します。設定は OS のアプリデータフォルダに保存され、音声の一時ファイルも同じ場所に保存・再生後に削除されます。
 
-`/buzz join`
+## 音声と料金
 
-### 接続解除
+既定は高品質な `ja-JP-Chirp3-HD-Aoede` です。Chirp 3: HD は日本語を含む多言語に対応し、月100万文字まで無料です。Gemini TTS は無料枠がありません。
 
-`/buzz shutdown`
+## Discord コマンド
 
-### 翻訳
+- `/buzz join` — 実行者がいるボイスチャンネルに参加
+- `/buzz shutdown` — ボイスチャンネルから退出
+- `/buzz speak ja-JP こんにちは` — 任意のテキストを読み上げ
+- `/buzz translate en-US ja-JP hello` — 原文と翻訳を順に読み上げ
+- `/buzz choice 赤,青,緑` — 候補からランダムに選ぶ
 
-翻訳前と翻訳後のテキストを読み上げます。
-コマンド実行後、翻訳されたテキストがリプライされます。
+言語コードは BCP 47 形式（例: `ja-JP`, `en-US`, `cmn-CN`, `ru-RU`）を使います。
 
-`/buzz tran [ソース言語コード] [ターゲット言語コード] [テキスト]`
+## YouTube 投稿者ごとの音声
 
-※言語コードは ISO-639-1。以下リンクに言語コード一覧ありマス。  
-https://cloud.google.com/translate/docs/languages?hl=ja
+YouTube Live の投稿者はコメントで自分用の音声を選択できます。選択は公開チャンネルIDに紐づけて保存され、表示名が変わっても維持されます。
 
-例:日本語を台湾語に翻訳したい場合  
-`/buzz tran ja zh-TW こんにちは`
-
-### 話す
-
-指定した言語のテキスト読み上げます。
-
-`/buzz speak [言語コード] [テキスト]`
-
-※言語コードは ISO-639-1。以下リンクに言語コード(ry  
-https://cloud.google.com/translate/docs/languages?hl=ja
-
-例:英語で読み上げる場合  
-`/buzz tran en oppai no perapera source`
-
-### サイコロ転がす
-
-何かを選びたいときに使います。
-選びたい文字列をカンマ区切りでつないでください。
-
-`/buzz dice [選びたい文字(カンマ区切り)]`
-
-例:晩御飯をラーメン,カレー,牛丼の中から選ぶ場合  
-`/buzz dice ラーメン,カレー,牛丼`
-
-### ジングル
-
-ジングルを鳴らします
-
-`/buzz jingle [mp3ファイル名]`
-
-※ファイル名は以下を参照してください。  
-https://github.com/shun178/buzz/tree/main/audio
-
-例:笑い声を再生する  
-`/buzz jingle warai.mp3`
+- `/buzz voice kore` — 話者名を指定して変更（30種類）
+- `/buzz voice female` — Aoede（女性）のショートカット
+- `/buzz voice male` — Achird（男性）のショートカット
+- `/buzz voice default` — 標準音声へ戻す

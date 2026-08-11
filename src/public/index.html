@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BUZZ!!</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">LIVE COMMENT VOICE</p>
+          <h1>BUZZ!!</h1>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite">設定を読み込み中…</p>
+      </header>
+
+      <nav class="quick-links" aria-label="画面内メニュー">
+        <a href="#settings">1. 設定</a>
+        <a href="#discord">2. Discord</a>
+        <a href="#youtube">3. YouTube Live</a>
+        <a href="#command">コマンド</a>
+      </nav>
+
+      <section id="settings" class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="step">STEP 1</p>
+            <h2>接続設定</h2>
+          </div>
+          <button id="saveSettings" class="secondary" type="button">設定を保存</button>
+        </div>
+        <p class="description">初回だけ入力します。保存済みの値は起動時に自動で読み込まれます。</p>
+        <div class="field-grid">
+          <label>
+            <span>Discord Bot Token</span>
+            <input id="discordBotToken" type="password" autocomplete="off" spellcheck="false" />
+          </label>
+          <label>
+            <span>Google Cloud Project ID</span>
+            <input id="gcpProjectId" autocomplete="off" spellcheck="false" />
+          </label>
+        </div>
+        <label>
+          <span>サービスアカウント JSON の絶対パス</span>
+          <input id="credentialsPath" autocomplete="off" spellcheck="false" />
+        </label>
+        <label class="checkbox-row">
+          <input id="showToken" type="checkbox" />
+          <span>Token を表示する</span>
+        </label>
+        <p class="hint">標準音声: Chirp 3 HD / ja-JP-Chirp3-HD-Aoede</p>
+      </section>
+
+      <section id="discord" class="panel action-panel">
+        <div>
+          <p class="step">STEP 2</p>
+          <h2>Discord を開始</h2>
+          <p class="description">接続後、Discord のボイスチャンネル内で <code>/buzz join</code> を実行します。</p>
+        </div>
+        <button id="startDiscord" type="button">Discord Bot を開始</button>
+      </section>
+
+      <section id="youtube" class="panel action-panel">
+        <div>
+          <p class="step">STEP 3</p>
+          <h2>YouTube Live を開始</h2>
+          <p class="description">YouTubeの配信URLまたは11文字のライブIDを入力します。</p>
+        </div>
+        <div class="inline-form">
+          <input id="liveUrlOrId" aria-label="YouTube Live URL または ID" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" />
+          <button id="startYouTube" type="button">コメント取得を開始</button>
+        </div>
+        <label class="chat-log">
+          <span>最新コメント</span>
+          <textarea id="chat" rows="4" readonly placeholder="コメントを待機中"></textarea>
+        </label>
+      </section>
+
+      <section id="command" class="panel">
+        <p class="step">OPTIONAL</p>
+        <h2>手動コマンド</h2>
+        <form id="commandForm" class="inline-form">
+          <input id="command" aria-label="コマンド" placeholder="/buzz speak ja-JP こんにちは" autocomplete="off" />
+          <button type="submit">実行</button>
+        </form>
+        <details>
+          <summary>使えるコマンド</summary>
+          <ul>
+            <li><code>/buzz join</code> — ボイスチャンネルへ参加</li>
+            <li><code>/buzz shutdown</code> — ボイスチャンネルから退出</li>
+            <li><code>/buzz speak ja-JP こんにちは</code> — 読み上げ</li>
+            <li><code>/buzz translate en-US ja-JP hello</code> — 翻訳して読み上げ</li>
+            <li><code>/buzz choice 赤,青,緑</code> — ランダム選択</li>
+          </ul>
+        </details>
+        <details>
+          <summary>YouTubeコメント投稿者の声</summary>
+          <p class="description">投稿者本人がコメントで設定できます。選択はYouTubeチャンネルIDに紐づけて保存されます。</p>
+          <ul>
+            <li><code>/buzz voice kore</code> — 話者名を指定して変更</li>
+            <li><code>/buzz voice female</code> — Aoede（女性）のショートカット</li>
+            <li><code>/buzz voice male</code> — Achird（男性）のショートカット</li>
+            <li><code>/buzz voice default</code> — 標準音声へ戻す</li>
+          </ul>
+          <p class="description">女性: Achernar, Aoede, Autonoe, Callirrhoe, Despina, Erinome, Gacrux, Kore, Laomedeia, Leda, Pulcherrima, Sulafat, Vindemiatrix, Zephyr</p>
+          <p class="description">男性: Achird, Algenib, Algieba, Alnilam, Charon, Enceladus, Fenrir, Iapetus, Orus, Puck, Rasalgethi, Sadachbia, Sadaltager, Schedar, Umbriel, Zubenelgenubi</p>
+        </details>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
