@@ -1,0 +1,12 @@
+:root { font-family: Inter, "Noto Sans JP", sans-serif; color: #fff; }
+* { box-sizing: border-box; }
+html, body { width: 100%; min-height: 100%; margin: 0; background: transparent; overflow: hidden; }
+.comment-stack { display: flex; flex-direction: column; gap: 10px; width: min(100%, 430px); padding: 12px; }
+.comment { overflow: hidden; border: 1px solid rgb(255 255 255 / 22%); border-left: 5px solid #ff5a65; border-radius: 10px; background: rgb(12 15 25 / 88%); box-shadow: 0 6px 18px rgb(0 0 0 / 32%); animation: enter .25s ease-out; }
+.comment.twitch { border-left-color: #a970ff; }
+.comment header { display: flex; align-items: center; gap: 8px; padding: 8px 11px 0; font-size: 14px; font-weight: 750; }
+.platform { padding: 2px 6px; border-radius: 4px; background: #df3e4d; font-size: 11px; letter-spacing: .04em; }
+.twitch .platform { background: #8252d9; }
+.author { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px 2px #000; }
+.comment p { margin: 6px 11px 10px; font-size: 18px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; text-shadow: 0 1px 2px #000; }
+@keyframes enter { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: translateX(0); } }

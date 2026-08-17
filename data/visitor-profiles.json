@@ -1,0 +1,86 @@
+{
+  "YouTube:UCHnGffEuYzawU58KPExtz8g": {
+    "platform": "YouTube",
+    "authorId": "UCHnGffEuYzawU58KPExtz8g",
+    "authorName": "@mikami_lion",
+    "firstSeenAt": "2026-08-15T14:48:28.147Z",
+    "lastSeenAt": "2026-08-15T15:47:29.750Z",
+    "commentCount": 9,
+    "visitCount": 1,
+    "visits": {
+      "7S1NfafF1rk": {
+        "firstSeenAt": "2026-08-15T14:48:28.147Z",
+        "lastSeenAt": "2026-08-15T15:47:29.750Z"
+      }
+    },
+    "memo": ""
+  },
+  "YouTube:UCvQeZe5hAYifC4ULIZNFDgw": {
+    "platform": "YouTube",
+    "authorId": "UCvQeZe5hAYifC4ULIZNFDgw",
+    "authorName": "@K4gam1ng",
+    "firstSeenAt": "2026-08-15T15:06:59.021Z",
+    "lastSeenAt": "2026-08-15T15:45:26.752Z",
+    "commentCount": 4,
+    "visitCount": 1,
+    "visits": {
+      "7S1NfafF1rk": {
+        "firstSeenAt": "2026-08-15T15:06:59.021Z",
+        "lastSeenAt": "2026-08-15T15:45:26.752Z"
+      }
+    },
+    "memo": ""
+  },
+  "YouTube:UCPzSIHZrQ8CnmG1FIeMFQDw": {
+    "platform": "YouTube",
+    "authorId": "UCPzSIHZrQ8CnmG1FIeMFQDw",
+    "authorName": "@ケンシム-WORLD",
+    "firstSeenAt": "2026-08-15T15:07:08.032Z",
+    "lastSeenAt": "2026-08-15T15:45:26.752Z",
+    "commentCount": 6,
+    "visitCount": 1,
+    "visits": {
+      "7S1NfafF1rk": {
+        "firstSeenAt": "2026-08-15T15:07:08.032Z",
+        "lastSeenAt": "2026-08-15T15:45:26.752Z"
+      }
+    },
+    "memo": ""
+  },
+  "YouTube:UC2AbxptWiviQaaK7WaWA7zw": {
+    "platform": "YouTube",
+    "authorId": "UC2AbxptWiviQaaK7WaWA7zw",
+    "authorName": "@까리몽",
+    "firstSeenAt": "2026-08-15T15:07:08.032Z",
+    "lastSeenAt": "2026-08-15T15:45:26.752Z",
+    "commentCount": 4,
+    "visitCount": 1,
+    "visits": {
+      "7S1NfafF1rk": {
+        "firstSeenAt": "2026-08-15T15:07:08.032Z",
+        "lastSeenAt": "2026-08-15T15:45:26.752Z"
+      }
+    },
+    "memo": "マッチしただけ。コメントではいい人っぽい。"
+  },
+  "Twitch:511159336": {
+    "platform": "Twitch",
+    "authorId": "511159336",
+    "authorName": "みかみライオン",
+    "firstSeenAt": "2026-08-15T15:21:20.206Z",
+    "lastSeenAt": "2026-08-15T15:48:07.551Z",
+    "commentCount": 2,
+    "visitCount": 2,
+    "visits": {
+      "offline-2026-08-15": {
+        "firstSeenAt": "2026-08-15T15:21:20.206Z",
+        "lastSeenAt": "2026-08-15T15:21:20.206Z"
+      },
+      "320942889946": {
+        "firstSeenAt": "2026-08-15T15:48:07.551Z",
+        "lastSeenAt": "2026-08-15T15:48:07.551Z"
+      }
+    },
+    "memo": ""
+  }
+}

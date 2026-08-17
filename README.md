@@ -1,6 +1,10 @@
 # BUZZ!!
 
-Discord と YouTube Live のコメントを Google Cloud Text-to-Speech で読み上げます。Electron は使用せず、Node.js のローカル Web サーバーと既定ブラウザだけで動く軽量構成です。
+Discord、YouTube Live、Twitch のコメントを Google Cloud Text-to-Speech で読み上げます。Electron は使用せず、Node.js のローカル Web サーバーと既定ブラウザだけで動く軽量構成です。
+
+## Twitch
+
+設定画面に Twitch の Bot ユーザー名と OAuth Token を入力し、読み上げたいチャンネルの URL またはチャンネル名を指定します。Token には `chat:read` 権限が必要です。Twitch のコメントは、接続後に Discord のボイスチャンネルで読み上げられます。
 
 ## 起動
 

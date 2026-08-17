@@ -9,104 +9,74 @@
   <body>
     <main class="app-shell">
       <header class="app-header">
-        <div>
-          <p class="eyebrow">LIVE COMMENT VOICE</p>
-          <h1>BUZZ!!</h1>
-        </div>
-        <p id="status" class="status" role="status" aria-live="polite">設定を読み込み中…</p>
+        <div><p class="eyebrow">LIVE COMMENT VOICE</p><h1>BUZZ!!</h1><p class="header-copy">登録済みのライブコメントを Discord で読み上げます。</p></div>
+        <p id="status" class="status" role="status" aria-live="polite">準備中…</p>
       </header>
 
-      <nav class="quick-links" aria-label="画面内メニュー">
-        <a href="#settings">1. 設定</a>
-        <a href="#discord">2. Discord</a>
-        <a href="#youtube">3. YouTube Live</a>
-        <a href="#command">コマンド</a>
-      </nav>
+      <div class="tabs" role="tablist" aria-label="画面切替">
+        <button class="tab-button" type="button" data-tab="dashboard" role="tab" aria-selected="true">配信を開始</button>
+        <button class="tab-button" type="button" data-tab="settings" role="tab" aria-selected="false">設定・チャンネル登録</button>
+      </div>
 
-      <section id="settings" class="panel">
-        <div class="panel-heading">
-          <div>
-            <p class="step">STEP 1</p>
-            <h2>接続設定</h2>
+      <section id="dashboard" class="tab-panel" role="tabpanel">
+        <section class="hero-panel">
+          <p class="step">READY TO GO</p>
+          <h2>配信コメントの読み上げ</h2>
+          <p>登録済みの YouTube・Twitch チャンネルを確認し、ライブ配信があれば接続します。もう一度押すと Discord Bot とコメント接続を最初から再起動します。</p>
+          <button id="startAll" class="start-button" type="button">すべて接続・再接続</button>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading"><div><p class="step">CONNECTION STATUS</p><h2>接続状況</h2></div><span class="live-badge">● 自動更新</span></div>
+          <div class="connection-grid">
+            <article class="connection-card" data-state="idle"><div><span class="connection-name">Discord</span><p id="discordConnection">未接続</p></div><span class="state-dot"></span></article>
+            <article class="connection-card" data-state="idle"><div><span class="connection-name">YouTube Live</span><p id="youtubeConnection">未接続</p></div><span class="state-dot"></span></article>
+            <article class="connection-card" data-state="idle"><div><span class="connection-name">Twitch</span><p id="twitchConnection">未接続</p></div><span class="state-dot"></span></article>
           </div>
-          <button id="saveSettings" class="secondary" type="button">設定を保存</button>
-        </div>
-        <p class="description">初回だけ入力します。保存済みの値は起動時に自動で読み込まれます。</p>
-        <div class="field-grid">
-          <label>
-            <span>Discord Bot Token</span>
-            <input id="discordBotToken" type="password" autocomplete="off" spellcheck="false" />
-          </label>
-          <label>
-            <span>Google Cloud Project ID</span>
-            <input id="gcpProjectId" autocomplete="off" spellcheck="false" />
-          </label>
-        </div>
-        <label>
-          <span>サービスアカウント JSON の絶対パス</span>
-          <input id="credentialsPath" autocomplete="off" spellcheck="false" />
-        </label>
-        <label class="checkbox-row">
-          <input id="showToken" type="checkbox" />
-          <span>Token を表示する</span>
-        </label>
-        <p class="hint">標準音声: Chirp 3 HD / ja-JP-Chirp3-HD-Aoede</p>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="panel-heading"><div><p class="step">COMMENTS & VISITORS</p><h2>コメント・投稿者</h2><p class="description">訪問回数は、同じ配信で何件コメントしても 1 回です。</p></div></div>
+          <div class="sub-tabs" role="tablist" aria-label="コメントと投稿者の表示切替">
+            <button class="sub-tab" type="button" data-view="comments" aria-selected="true">最新コメント</button>
+            <button class="sub-tab" type="button" data-view="today" aria-selected="false">今日の投稿者</button>
+            <button class="sub-tab" type="button" data-view="visitors" aria-selected="false">すべての投稿者</button>
+          </div>
+          <div id="commentsView" class="visitor-view"><div id="chat" class="comment-feed" aria-live="polite"><p class="empty-message">コメントを待機中</p></div></div>
+          <div id="todayView" class="visitor-view" hidden><div id="todayVisitors" class="visitor-list"><p class="empty-message">投稿者データを読み込み中</p></div></div>
+          <div id="visitorsView" class="visitor-view" hidden><div id="visitors" class="visitor-list"><p class="empty-message">投稿者データを読み込み中</p></div></div>
+        </section>
+
+        <section class="panel overlay-help">
+          <p class="step">OBS OVERLAY</p><h2>縦型コメント表示</h2>
+          <p class="description">OBS の「ブラウザ」ソースに次の URL を指定してください。推奨サイズは幅 430、高さ 900 です。</p>
+          <code>http://127.0.0.1:3210/overlay</code>
+        </section>
       </section>
 
-      <section id="discord" class="panel action-panel">
-        <div>
-          <p class="step">STEP 2</p>
-          <h2>Discord を開始</h2>
-          <p class="description">接続後、Discord のボイスチャンネル内で <code>/buzz join</code> を実行します。</p>
-        </div>
-        <button id="startDiscord" type="button">Discord Bot を開始</button>
-      </section>
-
-      <section id="youtube" class="panel action-panel">
-        <div>
-          <p class="step">STEP 3</p>
-          <h2>YouTube Live を開始</h2>
-          <p class="description">YouTubeの配信URLまたは11文字のライブIDを入力します。</p>
-        </div>
-        <div class="inline-form">
-          <input id="liveUrlOrId" aria-label="YouTube Live URL または ID" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" />
-          <button id="startYouTube" type="button">コメント取得を開始</button>
-        </div>
-        <label class="chat-log">
-          <span>最新コメント</span>
-          <textarea id="chat" rows="4" readonly placeholder="コメントを待機中"></textarea>
-        </label>
-      </section>
-
-      <section id="command" class="panel">
-        <p class="step">OPTIONAL</p>
-        <h2>手動コマンド</h2>
-        <form id="commandForm" class="inline-form">
-          <input id="command" aria-label="コマンド" placeholder="/buzz speak ja-JP こんにちは" autocomplete="off" />
-          <button type="submit">実行</button>
-        </form>
-        <details>
-          <summary>使えるコマンド</summary>
-          <ul>
-            <li><code>/buzz join</code> — ボイスチャンネルへ参加</li>
-            <li><code>/buzz shutdown</code> — ボイスチャンネルから退出</li>
-            <li><code>/buzz speak ja-JP こんにちは</code> — 読み上げ</li>
-            <li><code>/buzz translate en-US ja-JP hello</code> — 翻訳して読み上げ</li>
-            <li><code>/buzz choice 赤,青,緑</code> — ランダム選択</li>
-          </ul>
-        </details>
-        <details>
-          <summary>YouTubeコメント投稿者の声</summary>
-          <p class="description">投稿者本人がコメントで設定できます。選択はYouTubeチャンネルIDに紐づけて保存されます。</p>
-          <ul>
-            <li><code>/buzz voice kore</code> — 話者名を指定して変更</li>
-            <li><code>/buzz voice female</code> — Aoede（女性）のショートカット</li>
-            <li><code>/buzz voice male</code> — Achird（男性）のショートカット</li>
-            <li><code>/buzz voice default</code> — 標準音声へ戻す</li>
-          </ul>
-          <p class="description">女性: Achernar, Aoede, Autonoe, Callirrhoe, Despina, Erinome, Gacrux, Kore, Laomedeia, Leda, Pulcherrima, Sulafat, Vindemiatrix, Zephyr</p>
-          <p class="description">男性: Achird, Algenib, Algieba, Alnilam, Charon, Enceladus, Fenrir, Iapetus, Orus, Puck, Rasalgethi, Sadachbia, Sadaltager, Schedar, Umbriel, Zubenelgenubi</p>
-        </details>
+      <section id="settings" class="tab-panel" role="tabpanel" hidden>
+        <section class="panel">
+          <div class="panel-heading"><div><p class="step">SETUP</p><h2>認証情報とチャンネル登録</h2><p class="description">登録後は「配信を開始」タブのボタンだけで接続できます。</p></div><button id="saveSettings" class="secondary" type="button">設定を保存</button></div>
+          <div class="settings-groups">
+            <fieldset><legend>Google Cloud（読み上げ）</legend><div class="field-grid">
+              <label><span>Google Cloud Project ID</span><input id="gcpProjectId" autocomplete="off" /></label>
+              <label><span>サービスアカウント JSON のパス</span><input id="credentialsPath" placeholder="C:\\path\\to\\service-account.json" autocomplete="off" /></label>
+            </div></fieldset>
+            <fieldset><legend>Discord</legend><label><span>Discord Bot Token</span><input id="discordBotToken" type="password" autocomplete="off" /></label></fieldset>
+            <fieldset><legend>YouTube Live</legend><p class="field-help">YouTube Data API v3 を有効化した API キーと、チャンネル URL・<code>@ハンドル</code>・チャンネル ID を登録します。</p><div class="field-grid">
+              <label><span>YouTube Data API キー</span><input id="youtubeApiKey" type="password" autocomplete="off" /></label>
+              <label><span>読み上げる YouTube チャンネル</span><input id="youtubeChannel" placeholder="https://www.youtube.com/@channel" autocomplete="off" /></label>
+            </div></fieldset>
+            <fieldset><legend>Twitch</legend><p class="field-help"><code>chat:read</code> 権限付き OAuth Token と、読み上げるチャンネルを登録します。</p><div class="field-grid">
+              <label><span>Twitch Bot ユーザー名</span><input id="twitchBotUsername" autocomplete="off" /></label>
+              <label><span>Twitch OAuth Token</span><input id="twitchOAuthToken" type="password" autocomplete="off" /></label>
+              <label><span>Twitch Client ID</span><input id="twitchClientId" autocomplete="off" /></label>
+              <label class="wide-field"><span>読み上げる Twitch チャンネル</span><input id="twitchChannel" placeholder="https://www.twitch.tv/mikamilion" autocomplete="off" /></label>
+            </div></fieldset>
+          </div>
+          <label class="checkbox-row"><input id="showToken" type="checkbox" /><span>Token を表示する</span></label>
+        </section>
+        <section class="panel compact-panel"><p class="step">OPTIONAL</p><h2>手動コマンド</h2><form id="commandForm" class="inline-form"><input id="command" placeholder="/buzz speak ja-JP こんにちは" autocomplete="off" /><button type="submit">実行</button></form></section>
       </section>
     </main>
     <script src="/app.js"></script>
